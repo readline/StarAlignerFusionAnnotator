@@ -38,7 +38,7 @@ def loadJunctionReadName(junctionReadNamePath, candidateDic):
     
     return junctionReadDic
 
-def test_loadFusionCandidates():
+def test_loadJunctionReadName():
     from LoadCandidates import test_loadFusionCandidates
     candidateDic = test_loadFusionCandidates()
 
@@ -47,7 +47,7 @@ def test_loadFusionCandidates():
     return loadJunctionReadName(junctionReadNamePath, candidateDic)
     
 if __name__ == '__main__':
-    tmpdic = test_loadFusionCandidates()
+    tmpdic = test_loadJunctionReadName()
     for n in tmpdic:
         print n
         print tmpdic[n]
