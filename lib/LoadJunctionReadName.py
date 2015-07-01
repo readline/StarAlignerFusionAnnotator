@@ -20,9 +20,6 @@ def loadJunctionReadName(junctionReadNamePath, candidateDic):
                 c['RightGene'],
                 c['fusion_name'])
         tmphash[juncId] = cand
-    for n in tmphash:
-        if 'ENSG00000115310.13' in n and 'ENSG00000143947.8' in n:
-            print n
 
     infile = open(junctionReadNamePath, 'r')
     junctionReadDic = {}
