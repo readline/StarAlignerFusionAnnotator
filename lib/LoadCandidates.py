@@ -53,7 +53,7 @@ def test_loadFusionCandidates():
     
     candidateDic = loadFusionCandidates(candidatesPath)
 
-    print candidateDic
+    return candidateDic
 
 if __name__ == '__main__':
-    test_loadFusionCandidates()
+    print test_loadFusionCandidates()
