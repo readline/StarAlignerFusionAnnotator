@@ -12,7 +12,9 @@ def loadSpanningReadName(spanningReadNamePath, candidateDic):
         juncId = '%s--%s' %(
                 c['LeftGene'],
                 c['RightGene'])
-        tmphash[juncId] = cand
+        if juncId not in tmphash:
+            tmphash[juncId] = {}
+        tmphash[juncId][cand] = 1
 
     infile = open(spanningReadNamePath, 'r')
 
@@ -25,9 +27,12 @@ def loadSpanningReadName(spanningReadNamePath, candidateDic):
         if c[0] not in tmphash:
             # filted out candidates
             continue
-        if tmphash[c[0]] not in spanningReadDic:
-            spanningReadDic[tmphash[c[0]]] = {}
-        spanningReadDic[tmphash[c[0]]][c[1]] = 1
+        for candid in tmphash[c[0]]:
+            if candid not in spanningReadDic:
+                spanningReadDic[candid] = {}
+            if c[1] not in spanningReadDic[candid]:
+                spanningReadDic[candid][c[1]] = 1
+
     infile.close()
     
     return spanningReadDic
@@ -44,7 +49,10 @@ if __name__ == '__main__':
     tmpdic = test_loadSpanningReadName()
     for n in tmpdic:
         print n
-        print tmpdic[n]
+        print str(tmpdic[n])[:60]
+        print len(tmpdic[n])
+        print len(set((tmpdic[n].keys())))
+        raw_input()
         
 
 

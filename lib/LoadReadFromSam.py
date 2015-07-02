@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import division
-import os
+import os, gzip
 
 def calcQ(qseq):
     qlist = [ord(n) for n in qseq]
@@ -14,9 +14,9 @@ def LoadSam(samPath):
     '''
     readKeyDic = {}
     if samPath[-3:] == '.gz':
-        infile = os.popen('zcat %s | samtools view -S -X -' %samPath)
+        infile = gzip.open(samPath, 'rb')
     else:
-        infile = os.popen('cat %s | samtools view -S -X -' %samPath)
+        infile = open(samPath, 'r')
     while 1:
         line = infile.readline()
         if not line:
