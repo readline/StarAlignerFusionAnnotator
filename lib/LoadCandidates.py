@@ -29,13 +29,13 @@ def loadFusionCandidates(candidatesPath, cut1=[2,5], cut2=[1,10], cut3=[0,20]):
         if c[4].split(':')[0] == 'chrM' and c[7].split(':')[0] == 'chrM':
             continue
 
-        if int(c[1]) >= 2 and int(c[2]) >= 5:
+        if int(c[1]) >= cut1[0] and int(c[2]) >= cut1[1]:
             # 2. keep >= 2 junction reads and >= 5 spanning frags
             pass
-        elif int(c[1]) >= 1 and int(c[2]) >= 10:
+        elif int(c[1]) >= cut2[0] and int(c[2]) >= cut2[1]:
             # 3. keep >= 1 junction reads and >= 10 spanning frags
             pass
-        elif int(c[1]) >= 0 and int(c[2]) >= 20:
+        elif int(c[1]) >= cut3[0] and int(c[2]) >= cut3[1]:
             # 4. keep >= 0 junction reads and >= 20 spanning frags
             pass
         else:
