@@ -37,15 +37,15 @@ def LoadSam(samPath):
         readDic[readid]['qlt'] = tmpqlt
         readDic[readid]['bcd'] = tmpbcd
 
-    return readDic
+    return readKeyDic
 
 def test_LoadSam():
     samPath = '../testdata/Chimeric.out.sam.gz'
     return LoadSam(samPath)
 
 if __name__ == '__main__':
-    readDic = test_LoadSam()
-    for readid in readDic:
+    readKeyDic = test_LoadSam()
+    for readid in readKeyDic:
         print readid
-        print readDic[readid]
+        print readKeyDic[readid]
         raw_input()
