@@ -12,7 +12,7 @@ def LoadSam(samPath):
     Out:
     {HWI-ST1347:50:C1D0UACXX:8:2301:7918:7079:{'bcd': 'chr15:38545396-chr15:38591660-chr15:38591701', 'qlt': 6186.138613861386}, ...}
     '''
-    readDic = {}
+    readKeyDic = {}
     if samPath[-3:] == '.gz':
         infile = os.popen('zcat %s | samtools view -S -X -' %samPath)
     else:
@@ -24,18 +24,18 @@ def LoadSam(samPath):
         if line[0] == '@':
             continue
         c = line.rstrip().split('\t')
-        if c[0] not in readDic:
-            readDic[c[0]] = {'bcd':[], 'qlt':[]}
-        readDic[c[0]]['bcd'].append('%s:%s' %(c[2], c[3]))
-        readDic[c[0]]['qlt'].append(calcQ(c[10]))
+        if c[0] not in readKeyDic:
+            readKeyDic[c[0]] = {'bcd':[], 'qlt':[]}
+        readKeyDic[c[0]]['bcd'].append('%s:%s' %(c[2], c[3]))
+        readKeyDic[c[0]]['qlt'].append(calcQ(c[10]))
     
     infile = ''
 
-    for readid in readDic:
-        tmpqlt = sum(set(readDic[readid]['qlt'])) / 2
-        tmpbcd = '-'.join(sorted(readDic[readid]['bcd']))
-        readDic[readid]['qlt'] = tmpqlt
-        readDic[readid]['bcd'] = tmpbcd
+    for readid in readKeyDic:
+        tmpqlt = sum(set(readKeyDic[readid]['qlt'])) / 2
+        tmpbcd = '-'.join(sorted(readKeyDic[readid]['bcd']))
+        readKeyDic[readid]['qlt'] = tmpqlt
+        readKeyDic[readid]['bcd'] = tmpbcd
 
     return readKeyDic
 
